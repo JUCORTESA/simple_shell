@@ -14,6 +14,7 @@
 char *_getline(size_t *p);
 void prompt(void);
 void sigintHandler(int sig_num);
-char *strtok1(char *str, const char *delim);
+char *_strtok(char *str, const char *delim);
 int _strlen(char *s);
+char **getargs(char *buffer);
 #endif

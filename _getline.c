@@ -78,5 +78,8 @@ char *_getline(size_t *p)
 		if (r != size)
 			break;
 	}
+	*p -= 1;
+	if (buff[*p] == '\n')
+		buff[*p] = '\0';
 	return (copy);
 }
