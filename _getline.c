@@ -73,7 +73,7 @@ char *_getline(size_t *p)
 		{
 			i++;
 			if (i == 5)
-				exit(0);
+				free(buff), exit(0);
 		}
 		if (r != size)
 			break;

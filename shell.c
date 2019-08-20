@@ -30,6 +30,7 @@ start:
 		wait(NULL);
 	if (e == -1)
 		printf("Error.\n");
+	freeAll(buffer, buff);
 	goto start;
 	return (0);
 }

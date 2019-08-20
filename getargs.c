@@ -4,11 +4,30 @@
  * @buffer: data catched for the getline
  * Return: a duble poirnte to the buffer
  */
+
+int count(char *buff, char *l)
+{
+	int i = 0, j = 0;
+	if (l != NULL)
+	{
+		while (buff && buff[i] != '\0')
+		{
+			if (buff[i] != l[0])
+			{
+				if (buff[i + 1] == l[0] || buff[i + 1] == '\0')
+					j++;
+			}
+			i++;
+		}
+	}
+	return (j);
+}
 char **getargs(char *buffer)
 {
 	char **buff, *token;
 	size_t cont = 0, i, y = 0;
 
+	cont = count(buffer, " ");
 	buff = malloc(sizeof(char *) * (cont + 1));
 	if (!buff)
 	{
