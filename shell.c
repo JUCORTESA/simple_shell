@@ -3,34 +3,42 @@
  * main - execute a simple shell
  * Return: nothing
  */
-int main(void)
+int main(int ac, char **av)
 {
-	char *buffer, **buff;
-	size_t c;
-	size_t *p = &c;
+	char *buffer, **buff = NULL;
+	ssize_t c, flag = 0;
+	ssize_t *p = &c;
 	pid_t child_pid;
-	int e;
 
-	signal(SIGINT, sigintHandler);
+	if (ac != 1)
+	{
+		buff = noninter(ac,av);
+		flag = 1;
+		goto conti;
+	}
+//	signal(SIGINT, sigintHandler);
 start:
 	buffer = NULL;
 	c = 0;
 	prompt();
 	buffer = _getline(p);
+	if (buffer == NULL)
+		return(0);
 	buff = getargs(buffer);
-	e = 0;
+	if (buff == NULL)
+		return(0);
+conti:
 	child_pid = fork();
 	if (child_pid == 0)
 	{
-
-		e = execve(buff[0], buff, NULL);
-
+		execve(buff[0], buff, NULL);
+		exit(0);
 	}
 	else
 		wait(NULL);
-	if (e == -1)
-		printf("Error.\n");
 	freeAll(buffer, buff);
+	if (flag)
+		exit(0);
 	goto start;
 	return (0);
 }

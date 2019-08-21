@@ -42,7 +42,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
  * @p: a pointer to the value of position
  * Return: a pointer to the first position of the buffer
  */
-char *_getline(size_t *p)
+char *_getline(ssize_t *p)
 {
 	char *buff, *copy;
 	ssize_t size = 1024, cont = 1, i;
@@ -56,6 +56,11 @@ char *_getline(size_t *p)
 	while (1)
 	{
 		r = read(STDIN_FILENO, buff, size);
+		if (r == 0)
+		{
+			*p = -1;
+			return (NULL);
+		}
 		if (r == -1)
 		{
 			free(buff);
