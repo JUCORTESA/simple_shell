@@ -8,11 +8,12 @@
 int count(char *buff, char *l)
 {
 	int i = 0, j = 0;
+
 	if (l != NULL)
 	{
 		while (buff && buff[i] != '\0')
 		{
-			if (buff[i] != l[0])
+			if (buff[i] != l[0] && buff[i] != '\n')
 			{
 				if (buff[i + 1] == l[0] || buff[i + 1] == '\0')
 					j++;
@@ -36,7 +37,7 @@ char **getargs(char *buffer)
 		exit(0); /* pendiente mirar error */
 	}
 	token = _strtok(buffer, " ");
-	while (token != NULL)
+	while (token != NULL && token[0] != '\n')
 	{
 		buff[y] = malloc(sizeof(char) * (strlen(token) + 1));
 		if (buff[y] == NULL)

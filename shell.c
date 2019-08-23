@@ -8,7 +8,7 @@ int main(void)
 	char *buffer, **buff = NULL;
 	ssize_t d;
 	size_t bufsize = 1024;
-	int status;
+	int status, s;
 
 
 	while(1)
@@ -25,6 +25,7 @@ int main(void)
 		d = getline(&buffer,&bufsize,stdin);
 		if (d == -1)
 			exit(0);
+//		spaces(buffer);
 		buff = getargs(buffer);
 		if (buff == NULL)
 		{
@@ -32,6 +33,8 @@ int main(void)
 			freeAll(buff);
 			return(0);
 		}
+		s = coincidence(buff, buffer);
+		s++;
 		if (fork() == 0)
 		{
 			status = execve(buff[0], buff, NULL);
