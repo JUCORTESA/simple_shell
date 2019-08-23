@@ -1,10 +1,9 @@
 #include "holberton.h"
 
-void freeAll(char *buffer, char **buf)
+void freeAll(char **buf)
 {
 	int i = 0;
 
-	free(buffer);
 	if (buf != NULL)
 	{
 		while (buf[i] != NULL)

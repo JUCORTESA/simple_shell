@@ -4,8 +4,8 @@
  * @sig_num: value that received
  * Return: nothing
  */
-void sigintHandler(int sig_num)
+void sigintHandler(int sig_num __attribute__((unused)))
 {
 	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
-		printf("Signal error: %i\n", sig_num);
+		write(1, "fail", 5);
 }

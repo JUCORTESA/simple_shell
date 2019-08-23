@@ -7,5 +7,5 @@ void prompt(void)
 {
 	char *prompt = "New shell $ ";
 
-	write(1, prompt, 12);
+	write(STDIN_FILENO, prompt, 12);
 }

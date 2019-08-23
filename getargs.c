@@ -31,17 +31,24 @@ char **getargs(char *buffer)
 	buff = malloc(sizeof(char *) * (cont + 1));
 	if (!buff)
 	{
+		free(buffer);
 		free(buff);
-		return (0); /* pendiente mirar error */
+		exit(0); /* pendiente mirar error */
 	}
 	token = _strtok(buffer, " ");
 	while (token != NULL)
 	{
 		buff[y] = malloc(sizeof(char) * (strlen(token) + 1));
+		if (buff[y] == NULL)
+		{
+			free(buffer);
+			freeAll(buff);
+			exit(0);
+		}
 		for (i = 0; i <= (strlen(token) - 1); i++)
 			buff[y][i] = token[i];
-		if (buff[y][i - 2] == '\n')
-			buff[y][i - 2] = '\0';
+		if (buff[y][i - 1] == '\n')
+			buff[y][i - 1] = '\0';
 		else
 			buff[y][i] = '\0';
 		y++;

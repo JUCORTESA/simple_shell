@@ -3,42 +3,48 @@
  * main - execute a simple shell
  * Return: nothing
  */
-int main(int ac, char **av)
+int main(void)
 {
 	char *buffer, **buff = NULL;
-	ssize_t c, flag = 0;
-	ssize_t *p = &c;
-	pid_t child_pid;
+	ssize_t d;
+	size_t bufsize = 1024;
+	int status;
 
-	if (ac != 1)
+
+	while(1)
 	{
-		buff = noninter(ac,av);
-		flag = 1;
-		goto conti;
+		signal(SIGINT, sigintHandler);
+		d = 0;
+		prompt();
+		buffer = malloc(bufsize * sizeof(char));
+		if (buffer == NULL)
+		{
+			free(buffer);
+			return(0);
+		}
+		d = getline(&buffer,&bufsize,stdin);
+		if (d == -1)
+			exit(0);
+		buff = getargs(buffer);
+		if (buff == NULL)
+		{
+			free(buffer);
+			freeAll(buff);
+			return(0);
+		}
+		if (fork() == 0)
+		{
+			status = execve(buff[0], buff, NULL);
+			freeAll(buff);
+			free(buffer);
+			if (status == -1)
+				printf("%s: not found\n", buff[0]);
+			exit(0);
+		}
+		else
+			wait(NULL);
+		freeAll(buff);
+		free(buffer);
 	}
-//	signal(SIGINT, sigintHandler);
-start:
-	buffer = NULL;
-	c = 0;
-	prompt();
-	buffer = _getline(p);
-	if (buffer == NULL)
-		return(0);
-	buff = getargs(buffer);
-	if (buff == NULL)
-		return(0);
-conti:
-	child_pid = fork();
-	if (child_pid == 0)
-	{
-		execve(buff[0], buff, NULL);
-		exit(0);
-	}
-	else
-		wait(NULL);
-	freeAll(buffer, buff);
-	if (flag)
-		exit(0);
-	goto start;
 	return (0);
 }
