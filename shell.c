@@ -22,7 +22,7 @@ int main(void)
 			free(buffer);
 			return(0);
 		}
-		d = getline(&buffer,&bufsize,stdin);
+		d = getline1(&buffer,&bufsize,stdin);
 		if (d == -1)
 			exit(0);
 //		spaces(buffer);
