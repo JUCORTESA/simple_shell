@@ -33,6 +33,7 @@ int count(char *buff, char *l);
 void freeAll(char **buff);
 int coincidence(char **buff, char *buffer);
 int ext(char * buffer, char **buff);
+void spaces(char *buffer);
 
 
 

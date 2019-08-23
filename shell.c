@@ -25,7 +25,7 @@ int main(void)
 		d = getline(&buffer,&bufsize,stdin);
 		if (d == -1)
 			exit(0);
-//		spaces(buffer);
+		spaces(buffer);
 		buff = getargs(buffer);
 		if (buff == NULL)
 		{
@@ -33,15 +33,15 @@ int main(void)
 			freeAll(buff);
 			return(0);
 		}
-		s = coincidence(buff, buffer);
-		s++;
-		if (fork() == 0)
+		if (buff[0] != NULL)
+			s = coincidence(buff, buffer);
+		if (fork() == 0 && s == -1)
 		{
 			status = execve(buff[0], buff, NULL);
+			if (status == -1 && buff[0 != NULL])
+				printf("%s: not found\n", buff[0]);
 			freeAll(buff);
 			free(buffer);
-			if (status == -1)
-				printf("%s: not found\n", buff[0]);
 			exit(0);
 		}
 		else
