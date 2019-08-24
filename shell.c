@@ -5,16 +5,16 @@
  */
 int main(void)
 {
-	char *buffer, **buff = NULL;
-	ssize_t d;
+	char *buffer, **buff = NULL/* , *path, *cpath */;
+	ssize_t d = 0;
 	size_t bufsize = 1024;
 	int status, s;
 
-
+//	path = get_env();
 	while(1)
 	{
+//		cpath = cpstring(path);
 		signal(SIGINT, sigintHandler);
-		d = 0;
 		prompt();
 		buffer = malloc(bufsize * sizeof(char));
 		if (buffer == NULL)
@@ -22,9 +22,10 @@ int main(void)
 			free(buffer);
 			return(0);
 		}
-		d = getline(&buffer,&bufsize,stdin);
+		d = getline1(&buffer,&bufsize,stdin);
 		if (d == -1)
 			exit(0);
+//		buffer = compare_path(buffer, cpath);
 		spaces(buffer);
 		buff = getargs(buffer);
 		if (buff == NULL)

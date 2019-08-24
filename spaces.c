@@ -23,3 +23,22 @@ void spaces(char *buffer)
 	else
 		return;
 }
+char *cpstring(char *path)
+{
+	char *cpath;
+	int i = 0;
+
+	cpath = malloc(sizeof(char) * strlen(path) + 1);
+	if (!cpath)
+	{
+		free(cpath);
+		return(cpath);
+	}
+	while(path[i] != '\0')
+	{
+		cpath[i] = path[i];
+		i++;
+	}
+
+	return (cpath);
+}

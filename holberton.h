@@ -12,6 +12,7 @@
 #include <sys/stat.h>
 #include <stdint.h>
 #include <stdarg.h>
+#include <fcntl.h>
 
 /**
  * struct type - struct of type of data
@@ -34,7 +35,14 @@ void freeAll(char **buff);
 int coincidence(char **buff, char *buffer);
 int ext(char * buffer, char **buff);
 void spaces(char *buffer);
-
+int env(char * buffer, char **buff);
+char *compare_path(char * buffer, char *path);
+char *str_concat(char *s1, char *s2);
+char *get_env(void);
+char *cpstring(char *path);
+ssize_t getline1(char **lineptr, size_t *n, FILE *stream);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+char *_strcpy(char *dest, char *src);
 
 
 
