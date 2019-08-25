@@ -23,11 +23,10 @@ Standard functions and system calls employed in simple_shell include:
 * [man_1_simple_shell](man_1_simple_shell) - Manual page for the simple_shell
 * [shell.h](shell.h) - program header file
 * [coincidence.c](coincidence.c) - 
-  * `coincidence` - 
-  * `ext` - 
-  * `_env` - 
-  * `env` - 
-  * `compare_path` - 
+  * `coincidence` - looks for coincidence
+  * `ext` - free and exit buffer
+  * `env` - prints environ
+  * `compare_path` - compare PATH in environ
   * `str_concate` - concates two strings
 * [free.c](free.c) - function related to free
   * `freeAll` - frees a buffer
@@ -49,7 +48,7 @@ Standard functions and system calls employed in simple_shell include:
 * [spaces.c](spaces.c) - functions related to string manipulation
   * `spaces` - compare size of string
   * `cpstring` - duplicates a string
-  * [shell.c](shell.c) - main function of the shell
+* [shell.c](shell.c) - main function of the shell
   * `main` - the main function of the program
 
 
