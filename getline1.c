@@ -1,6 +1,6 @@
 #include "holberton.h"
 /**
- * store_lineptr - assigns the line for get_line
+ * store_lineptr - assigns the line for getline1
  * @lineptr: buffer that store the string
  * @buffer: str that is been called to line
  * @size_l: size of line
