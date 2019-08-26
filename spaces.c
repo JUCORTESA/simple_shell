@@ -28,7 +28,7 @@ char *cpstring(char *path)
 	char *cpath;
 	int i = 0;
 
-	cpath = malloc(sizeof(char) * strlen(path) + 1);
+	cpath = _calloc((strlen(path) + 1), sizeof(char));
 	if (!cpath)
 	{
 		free(cpath);

@@ -46,6 +46,7 @@ char *cpstring(char *path);
 ssize_t getline1(char **lineptr, size_t *n, FILE *stream);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char *_strcpy(char *dest, char *src);
+void *_calloc(unsigned int nmemb, unsigned int size);
 
 
 

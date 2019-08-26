@@ -5,18 +5,18 @@
  */
 int main(void)
 {
-	char *buffer, **buff = NULL/* , *path, *cpath */;
+	char *buffer, **buff = NULL, *path, *cpath;
 	ssize_t d = 0;
 	size_t bufsize = 1024;
 	int status, s;
 
-//	path = get_env();
+	path = get_env();
 	while(1)
 	{
-//		cpath = cpstring(path);
+		cpath = cpstring(path);
 		signal(SIGINT, sigintHandler);
 		prompt();
-		buffer = malloc(bufsize * sizeof(char));
+		buffer = _calloc(bufsize, sizeof(char));
 		if (buffer == NULL)
 		{
 			free(buffer);
@@ -25,8 +25,8 @@ int main(void)
 		d = getline1(&buffer,&bufsize,stdin);
 		if (d == -1)
 			exit(0);
-//		buffer = compare_path(buffer, cpath);
 		spaces(buffer);
+		buffer = compare_path(buffer, cpath);
 		buff = getargs(buffer);
 		if (buff == NULL)
 		{
@@ -36,7 +36,7 @@ int main(void)
 		}
 		if (buff[0] != NULL)
 			s = coincidence(buff, buffer);
-		if (fork() == 0 && s == -1)
+		if (s == -1 && fork() == 0)
 		{
 			status = execve(buff[0], buff, NULL);
 			if (status == -1 && buff[0 != NULL])

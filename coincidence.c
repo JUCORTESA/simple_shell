@@ -8,14 +8,16 @@ int coincidence(char **buff, char *buffer)
 		{"env", env},
 		{NULL, NULL}
 	};
-	int i = 0, j, res = -1;
+	int i = 0, j, res = -1, x;
 	unsigned int cont = 0;
+
 
 	while(opci[i].type)
 	{
-		j = 0;
+		j = strlen(buff[0]);
+		x = strlen(opci[i].type);
 		cont = 0;
-		while(opci[i].type[j] == buff[0][j])
+		while(opci[i].type[x] == buff[0][j])
 		{
 			cont++;
 			if (cont == strlen(opci[i].type))
@@ -23,7 +25,8 @@ int coincidence(char **buff, char *buffer)
 				res = 1;
 				(*opci[i].functiontype)(buffer, buff);
 			}
-			j++;
+			j--;
+			x--;
 		}
 		i++;
 	}
@@ -71,23 +74,31 @@ char *compare_path(char *buffer, char*path)
 	file = str_concat(token, r);
 	while(open(file, O_RDONLY) == -1)
 	{
-		token = str_concat(_strtok(NULL, ":"), "/");
+		if (r[0] != '/')
+			token = str_concat(_strtok(NULL, ":"), "/");
+		else
+			token = _strtok(NULL, ":");
 		file = str_concat(token, r);
-		if(token[0] == '/' && token[1] == '\0')
+		if( token == NULL || (token[0] == '/' && token[1] == '\0'))
 			break;
 	}
-	if (token[0] == '/' && token[1] == '\0')
+	if (token == NULL || (token[0] == '/' && token[1] == '\0'))
 	{
-		r[len - 1] = '\n';
+		if (!r[len - 1])
+			r[len - 1] = '\n';
 		free(path);
-		free(cbuffer);
-		return(r);
+//		free(cbuffer);
+//		free(file);
+//		free(token);
+		return(buffer);
 	}
 	else
 	{
 		buffer = str_concat(token, buffer);
 		free(path);
 		free(cbuffer);
+		free(file);
+		free(token);
 		return(buffer);
 	}
 }

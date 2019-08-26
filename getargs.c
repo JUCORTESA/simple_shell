@@ -15,7 +15,8 @@ int count(char *buff, char *l)
 		{
 			if (buff[i] != l[0] && buff[i] != '\n')
 			{
-				if (buff[i + 1] == l[0] || buff[i + 1] == '\0')
+				if (buff[i + 1] == l[0] || buff[i + 1] == '\0'
+				    || buff[i + 1] == '\n' )
 					j++;
 			}
 			i++;
@@ -29,7 +30,8 @@ char **getargs(char *buffer)
 	size_t cont = 0, i, y = 0;
 
 	cont = count(buffer, " ");
-	buff = malloc(sizeof(char *) * (cont + 1));
+	buff = malloc(sizeof(char*) * (cont + 1));
+//	buff = _calloc((cont + 1), sizeof(char *));
 	if (!buff)
 	{
 		free(buffer);

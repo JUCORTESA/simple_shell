@@ -2,14 +2,18 @@
 
 void freeAll(char **buf)
 {
-	int i = 0;
+	int i = 0, cont = 0;
+
+	while(buf[i] != NULL)
+		cont++, i++;
 
 	if (buf != NULL)
 	{
-		while (buf[i] != NULL)
-			free(buf[i]), i++;
-		if (buf[i] == NULL)
-			free(buf[i]);
+		while (cont > 0)
+		{
+			free(buf[cont]);
+			cont--;
+		}
 		free(buf);
 	}
 }
