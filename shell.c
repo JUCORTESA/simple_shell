@@ -1,34 +1,54 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+#include "holberton.h"
+/**
+ * main - execute a simple shell
+ * Return: nothing
+ */
 int main(void)
 {
-	char *buffer = NULL;
-	size_t bufsize = 0, cont = 0, i;
-	ssize_t c;
-	char **buff;
-	char *token;
-	char *pal;
+	char *buffer, **buff = NULL, *path, *cpath;
+	ssize_t d = 0;
+	size_t bufsize = 1024;
+	int status, s;
 
-
-	printf("New shell$ ");
-	c = getline(&buffer, &bufsize, stdin);
-	token = strtok(buffer, " ");
-	while (token != NULL)
-		cont++, token = strtok(NULL, " ");
-	buff = malloc(sizeof(char *) * (cont + 1));
-	if (!buff)
-		return (0);
-	pal = strtok(buffer, " ");
-	buff[0] = malloc(sizeof(char) * (strlen(pal) + 1));
-	for(i = 0; i < (strlen(pal) -1); i++)
-		buff[0][i] = pal[i];
-	buff[0][i] = '\0';
-	buff[1] = NULL;
-	execve(buff[0], buff, NULL);
-
+	path = get_env();
+	while(1)
+	{
+		cpath = cpstring(path);
+		signal(SIGINT, sigintHandler);
+		prompt();
+		buffer = _calloc(bufsize, sizeof(char));
+		if (buffer == NULL)
+		{
+			free(buffer);
+			return(0);
+		}
+		d = getline1(&buffer,&bufsize,stdin);
+		if (d == -1)
+			exit(0);
+		spaces(buffer);
+		buffer = compare_path(buffer, cpath);
+		buff = getargs(buffer);
+		if (buff == NULL)
+		{
+			free(buffer);
+			freeAll(buff);
+			return(0);
+		}
+		if (buff[0] != NULL)
+			s = coincidence(buff, buffer);
+		if (s == -1 && fork() == 0)
+		{
+			status = execve(buff[0], buff, NULL);
+			if (status == -1 && buff[0 != NULL])
+				printf("%s: not found\n", buff[0]);
+			freeAll(buff);
+			free(buffer);
+			exit(0);
+		}
+		else
+			wait(NULL);
+		freeAll(buff);
+		free(buffer);
+	}
 	return (0);
 }

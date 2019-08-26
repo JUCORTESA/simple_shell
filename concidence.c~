@@ -1,0 +1,18 @@
+#include "holberton.h"
+int coincidence(char **buff)
+{
+	char *data = {"exit"};
+	int i, j;
+
+	i = 0;
+	while(buff[i] == data[i])
+	{
+		while(buff[i][j] == data[i][j])
+		{
+			return();
+			j++;
+		}
+		i++;
+	}
+	return(-1);
+}
