@@ -31,7 +31,6 @@ char **getargs(char *buffer)
 
 	cont = count(buffer, " ");
 	buff = malloc(sizeof(char*) * (cont + 1));
-//	buff = _calloc((cont + 1), sizeof(char *));
 	if (!buff)
 	{
 		free(buffer);

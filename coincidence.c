@@ -87,14 +87,12 @@ char *compare_path(char *buffer, char*path)
 		if (!r[len - 1])
 			r[len - 1] = '\n';
 		free(path);
-//		free(cbuffer);
-//		free(file);
-//		free(token);
 		return(buffer);
 	}
 	else
 	{
-		buffer = str_concat(token, buffer);
+		if (buffer[0] != '\n')
+			buffer = str_concat(token, buffer);
 		free(path);
 		free(cbuffer);
 		free(file);
