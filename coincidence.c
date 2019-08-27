@@ -6,6 +6,7 @@ int coincidence(char **buff, char *buffer)
 	data opci[] = {
 		{"exit", ext},
 		{"env", env},
+		{"cd", cd_fun},
 		{NULL, NULL}
 	};
 	int i = 0, j, res = -1, x;
@@ -22,8 +23,7 @@ int coincidence(char **buff, char *buffer)
 			cont++;
 			if (cont == strlen(opci[i].type))
 			{
-				res = 1;
-				(*opci[i].functiontype)(buffer, buff);
+				res = (*opci[i].functiontype)(buffer, buff);
 			}
 			j--;
 			x--;
@@ -47,7 +47,7 @@ int ext(char *buff, char **buffer)
 	}
 	free(buff);
 	freeAll(buffer);
-	exit(j);
+	exit(j % 256);
 }
 extern char** environ;
 int env(char *buff __attribute__((unused)), char **buffer __attribute__((unused)))
@@ -58,12 +58,12 @@ int env(char *buff __attribute__((unused)), char **buffer __attribute__((unused)
 	{
 		printf("%s\n", environ[i]);
 	}
-	return (0);
+	return (1);
 }
 char *compare_path(char *buffer, char*path)
 {
 	char *token, *r, *file, *cbuffer;
-	int len;
+	int len, d = -1;
 
 	cbuffer = cpstring(buffer);
 	r = _strtok(cbuffer, " ");
@@ -72,8 +72,9 @@ char *compare_path(char *buffer, char*path)
 		r[len - 1] = '\0';
 	token = _strtok(path, "/");
 	file = str_concat(token, r);
-	while(open(file, O_RDONLY) == -1)
+	while(d  == -1)
 	{
+		free(file);
 		if (r[0] != '/')
 			token = str_concat(_strtok(NULL, ":"), "/");
 		else
@@ -81,20 +82,24 @@ char *compare_path(char *buffer, char*path)
 		file = str_concat(token, r);
 		if( token == NULL || (token[0] == '/' && token[1] == '\0'))
 			break;
+		d = open(file, O_RDONLY);
+		if (d == -1)
+			free(token);
 	}
 	if (token == NULL || (token[0] == '/' && token[1] == '\0'))
 	{
 		if (!r[len - 1])
 			r[len - 1] = '\n';
 		free(path);
-//		free(cbuffer);
-//		free(file);
-//		free(token);
+		free(cbuffer);
+		free(file);
+		free(token);
 		return(buffer);
 	}
 	else
 	{
-		buffer = str_concat(token, buffer);
+		if (buffer[0] != '\n')
+			buffer = str_concat(token, buffer);
 		free(path);
 		free(cbuffer);
 		free(file);
@@ -104,8 +109,7 @@ char *compare_path(char *buffer, char*path)
 }
 char *str_concat(char *s1, char *s2)
 {
-	void *p = NULL;
-	char *s;
+	char *p = NULL;
 	int x = 0, y = 0, z, c;
 
 	if (s1 == NULL)
@@ -119,13 +123,12 @@ char *str_concat(char *s1, char *s2)
 	p = malloc(sizeof(char) * ((x + y) + 1));
 	if (p != 0)
 	{
-		s = (char *)p;
 		for (z = 0; z < x; z++)
-			s[z] = s1[z];
+			p[z] = s1[z];
 		for (z = z, c = 0; z < (x + y); z++, c++)
-			s[z] = s2[c];
-		s[z] = '\0';
-		return (s);
+			p[z] = s2[c];
+		p[z] = '\0';
+		return (p);
 	}
 	else
 		return (p);
