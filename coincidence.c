@@ -62,8 +62,8 @@ int env(char *buff __attribute__((unused)), char **buffer __attribute__((unused)
 }
 char *compare_path(char *buffer, char*path)
 {
-	char *token, *r, *file, *cbuffer;
-	int len, d = -1;
+	char *token, *r, *file, *cbuffer, *c;
+	int len, d = -1, flag = 0;
 
 	cbuffer = cpstring(buffer);
 	r = _strtok(cbuffer, " ");
@@ -76,14 +76,17 @@ char *compare_path(char *buffer, char*path)
 	{
 		free(file);
 		if (r[0] != '/')
+		{
 			token = str_concat(_strtok(NULL, ":"), "/");
+			flag = 1;
+		}
 		else
 			token = _strtok(NULL, ":");
 		file = str_concat(token, r);
 		if( token == NULL || (token[0] == '/' && token[1] == '\0'))
 			break;
 		d = open(file, O_RDONLY);
-		if (d == -1)
+		if (d == -1 && flag)
 			free(token);
 	}
 	if (token == NULL || (token[0] == '/' && token[1] == '\0'))
@@ -99,12 +102,15 @@ char *compare_path(char *buffer, char*path)
 	else
 	{
 		if (buffer[0] != '\n')
-			buffer = str_concat(token, buffer);
+		{
+			c = str_concat(token, buffer);
+			free(buffer);
+		}
 		free(path);
 		free(cbuffer);
 		free(file);
 		free(token);
-		return(buffer);
+		return(c);
 	}
 }
 char *str_concat(char *s1, char *s2)

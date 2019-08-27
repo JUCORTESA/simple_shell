@@ -1,4 +1,5 @@
 #include "holberton.h"
+extern char** environ;
 void spaces(char *buffer)
 {
 	int i = 0, j = 0;
@@ -20,8 +21,7 @@ void spaces(char *buffer)
 			buffer[j] = '\0';
 		}
 	}
-	else
-		return;
+	return;
 }
 char *cpstring(char *path)
 {
@@ -42,7 +42,6 @@ char *cpstring(char *path)
 
 	return (cpath);
 }
-extern char** environ;
 int cd_fun(char *buff __attribute__((unused)), char **buffer)
 {
 	char *dir, *pwd;

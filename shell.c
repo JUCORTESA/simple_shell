@@ -5,10 +5,10 @@
  */
 int main(void)
 {
-	char *buffer, **buff = NULL, *path, *cpath;
+	char *buffer = NULL, **buff = NULL, *path, *cpath;
 	ssize_t d = 0;
 	size_t bufsize = 1024;
-	int status, s = 0, cont = 0;
+	int status, s = 5, cont = 0;
 
 	while (1)
 	{
@@ -16,35 +16,36 @@ int main(void)
 		signal(SIGINT, sigintHandler), prompt();
 		buffer = malloc(bufsize * sizeof(char));
 		if (buffer == NULL)
-		{
-			free(buffer);
-			return (0);
-		}
+			free(buffer), ret();
 		d = getline1(&buffer, &bufsize, stdin);
 		if (d == -1)
 			exit(0);
-		spaces(buffer), buffer = compare_path(buffer, cpath), buff = getargs(buffer);
-		if (buff == NULL)
+		spaces(buffer), buffer = compare_path(buffer, cpath);
+		if (buffer[0] != '\n' && buffer[0] != '\0')
 		{
-			free(buffer), freeAll(buff);
-			return (0);
+			buff = getargs(buffer);
+			if (buff == NULL)
+				free(buffer), freeAll(buff), ret();
+			if (buff[0] != NULL)
+				s = coincidence(buff, buffer);
 		}
-		if (buff[0] != NULL)
-			s = coincidence(buff, buffer);
 		if (s == -1 && buff[0] != NULL && fork() == 0)
 		{
 			status = execve(buff[0], buff, NULL);
 			if (status == -1 && buff[0] != NULL)
 				printf("hsh : %i: %s: not found\n", cont, buff[0]);
-			freeAll(buff), free(buffer);
-			exit(0);
+			freeAll(buff), free(buffer), ret();
 		}
-		if (s == 0)
+		if (s == 0 && buff[0][0] != '\n')
 			printf("hsh : cd: %s: No such file or directory\n", buff[1]);
-		else
-			wait(NULL);
+		wait(NULL);
+		if (buffer[0] != '\n' && buffer[0] != '\0')
+			freeAll(buff);
 		free(buffer);
-		freeAll(buff);
 	}
 	return (0);
+}
+void ret(void)
+{
+	exit(0);
 }

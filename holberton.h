@@ -25,6 +25,7 @@ typedef struct type
 	int (*functiontype)(char *buffer, char **buff);
 } data;
 
+void ret(void);
 void prompt(void);
 void sigintHandler(int sig_num);
 char *_strtok(char *str, const char *delim);
