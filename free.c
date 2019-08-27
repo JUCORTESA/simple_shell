@@ -9,7 +9,7 @@ void freeAll(char **buf)
 
 	if (buf != NULL)
 	{
-		while (cont > 0)
+		while (cont >= 0)
 		{
 			free(buf[cont]);
 			cont--;
