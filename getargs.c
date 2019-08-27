@@ -26,7 +26,7 @@ int count(char *buff, char *l)
 }
 char **getargs(char *buffer)
 {
-	char **buff, *token;
+	char **buff = NULL, *token;
 	size_t cont = 0, i, y = 0;
 
 	cont = count(buffer, " ");
@@ -35,12 +35,12 @@ char **getargs(char *buffer)
 	{
 		free(buffer);
 		free(buff);
-		exit(0); /* pendiente mirar error */
+		exit(0);
 	}
 	token = _strtok(buffer, " ");
 	while (token != NULL && token[0] != '\n')
 	{
-		buff[y] = malloc(sizeof(char) * (strlen(token) + 1));
+		buff[y] = _calloc((strlen(token) + 1), sizeof(char));
 		if (buff[y] == NULL)
 		{
 			free(buffer);

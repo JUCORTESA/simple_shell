@@ -58,7 +58,7 @@ ssize_t getline1(char **lineptr, size_t *n, FILE *stream)
 	buffer = malloc(size);
 	if (buffer == 0)
 		return (-1);
-	while (buff != '\n')
+	do
 	{
 		i = read(STDIN_FILENO, &buff, 1);
 		if (i == -1 || (i == 0 && count == 0))
@@ -73,9 +73,16 @@ ssize_t getline1(char **lineptr, size_t *n, FILE *stream)
 		}
 		if (count >= size)
 			buffer = _realloc(buffer, count, count + 1);
+		if (buff == ';')
+			buff = '\n';
+		if (buff == '#')
+		{
+			while( buff != '\n')
+				read(STDIN_FILENO, &buff, 1);
+		}
 		buffer[count] = buff;
 		count++;
-	}
+	} while (buff != '\n' && buff != ';' && buff != '#');
 	buffer[count] = '\0';
 	store_lineptr(lineptr, n, buffer, count);
 	ret = count;

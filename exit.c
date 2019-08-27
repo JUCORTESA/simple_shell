@@ -6,6 +6,5 @@
  */
 void sigintHandler(int sig_num __attribute__((unused)))
 {
-	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
-		write(1, "fail", 5);
+		write(1, "\nNew shell $ ", 13);
 }

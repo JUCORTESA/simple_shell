@@ -25,6 +25,7 @@ typedef struct type
 	int (*functiontype)(char *buffer, char **buff);
 } data;
 
+void ret(void);
 void prompt(void);
 void sigintHandler(int sig_num);
 char *_strtok(char *str, const char *delim);
@@ -41,13 +42,16 @@ void spaces(char *buffer);
 int env(char * buffer, char **buff);
 char *compare_path(char * buffer, char *path);
 char *str_concat(char *s1, char *s2);
-char *get_env(void);
+char *get_env(char *);
 char *cpstring(char *path);
 ssize_t getline1(char **lineptr, size_t *n, FILE *stream);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char *_strcpy(char *dest, char *src);
 void *_calloc(unsigned int nmemb, unsigned int size);
-
+int cd_fun(char *buff, char **buffer);
+char *get_pwd(void);
+void changepwd(char *pwd);
+char *oldpwd(void);
 
 
 #endif
