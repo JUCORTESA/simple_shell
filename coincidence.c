@@ -69,6 +69,8 @@ int ext(char *buff, char **buffer)
 		freeAll(buffer);
 		e = extstatus(NULL);
 		f = e % 255;
+		if (environ[0] == NULL)
+			exit(0);
 		exit(f);
 	}
 	return (0);
@@ -134,8 +136,7 @@ char *compare_path(char *buffer, char *path)
 			c = str_concat(token, buffer);
 			while (c[n] != '\0')
 			{
-				buffer[n] = c[n], n++;
-			}
+				buffer[n] = c[n], n++; }
 			free(c);
 		}
 		free(path), free(cbuffer), free(file), free(token);
