@@ -8,7 +8,7 @@ int main(void)
 	char *buffer = NULL, **buff = NULL, *path, *cpath;
 	ssize_t d = 0;
 	size_t bufsize = (4096 * 2);
-	int status, s = 5, cont = 0, e = 0;
+	int status, s = 5, cont = 0, e = 0, en = 0;
 
 	while (1)
 	{
@@ -20,7 +20,8 @@ int main(void)
 		if (d == -1 || d == EOF)
 			free(buffer), ret();
 		s = 5, cont++, spaces(buffer);
-		if (environ[0] != NULL && environ[0][1] != 'P' && environ[0][1] != 'W')
+		en = get_env1();
+		if (environ[0] != NULL && en == 38)
 			path = get_env("PATH="), cpath = cpstring(path),
 				buffer = compare_path(buffer, cpath);
 		if (buffer[0] != '\n' && buffer[0] != '\0')

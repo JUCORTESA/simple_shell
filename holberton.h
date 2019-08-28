@@ -26,6 +26,7 @@ typedef struct type
 	int (*functiontype)(char *buffer, char **buff);
 } data;
 
+int get_env1(void);
 void check(int s, char **buff, char *buffer, int check);
 void writes3(char **buff, int cont);
 void writes0(char **buff);

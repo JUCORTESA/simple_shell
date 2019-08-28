@@ -49,3 +49,16 @@ char *get_pwd(void)
 	}
 	return (cpstring(environ[i]));
 }
+/**
+ * get_env1 - get a specific pointer of the env
+ * Return: a pointer to the data in the environ
+ */
+int get_env1(void)
+{
+	size_t i = 0;
+
+	for (; environ[i] != NULL; i++)
+	{
+	}
+	return (i);
+}
