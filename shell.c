@@ -31,7 +31,7 @@ int main(void)
 		}
 		if (s == -1 && buff[0] != NULL && fork() == 0)
 		{
-			status = execve(buff[0], buff, NULL);
+			status = execve(buff[0], buff, environ);
 			if (status == -1 && buff[0] != NULL)
 				writeexe(buff, cont);
 			freeAll(buff), free(buffer), ret();
