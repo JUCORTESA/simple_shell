@@ -14,7 +14,7 @@ int main(void)
 	{
 		s = 5, cont++, path = get_env("PATH="), cpath = cpstring(path);
 		signal(SIGINT, sigintHandler), prompt();
-		buffer = malloc(bufsize * sizeof(char));
+		buffer = _calloc(bufsize, sizeof(char));
 		if (buffer == NULL)
 			free(buffer), ret();
 		d = getline1(&buffer, &bufsize, stdin);

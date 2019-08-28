@@ -45,7 +45,7 @@ int coincidence(char **buff, char *buffer)
  */
 int ext(char *buff, char **buffer)
 {
-	int j = 0, dec = 0;
+	int j = 0, dec = 0, e = 0, f = 0;
 	unsigned int i = 0;
 
 	if (buffer[1])
@@ -67,7 +67,9 @@ int ext(char *buff, char **buffer)
 	{
 		free(buff);
 		freeAll(buffer);
-		exit((extstatus(NULL) % 255));
+		e = extstatus(NULL);
+		f = e % 255;
+		exit(f);
 	}
 	return (0);
 }
@@ -98,7 +100,7 @@ int env(char *buff __attribute__((unused)),
 char *compare_path(char *buffer, char *path)
 {
 	char *token, *r, *file, *cbuffer, *c;
-	int len, d = -1, flag = 0;
+	int len, d = -1, flag = 0, n = 0;
 
 	cbuffer = cpstring(buffer), r = _strtok(cbuffer, " ");
 	len = _strlen(r);
@@ -117,25 +119,22 @@ char *compare_path(char *buffer, char *path)
 			break;
 		d = open(file, O_RDONLY);
 		if (d == -1 && flag)
-			free(token);
-	}
+			free(token); }
 	if (token == NULL || (token[0] == '/' && token[1] == '\0'))
 	{
 		if (!r[len - 1])
 			r[len - 1] = '\n';
 		free(path), free(cbuffer), free(file), free(token);
-		return (buffer);
-	}
+		return (buffer); }
 	else
 	{
 		if (buffer[0] != '\n')
 		{
 			c = str_concat(token, buffer);
-			free(buffer);
-		}
+			while(c[n] != '\0')
+				buffer[n] = c[n], n++; }
 		free(path), free(cbuffer), free(file), free(token);
-		return (c);
-	}
+		return (buffer); }
 }
 /**
  * str_concat - mix two different strings
