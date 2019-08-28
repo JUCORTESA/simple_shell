@@ -18,7 +18,7 @@ int main(void)
 		if (buffer == NULL)
 			free(buffer), ret();
 		d = getline1(&buffer, &bufsize, stdin);
-		if (d == -1)
+		if (d == -1 || d == EOF)
 			exit(0);
 		spaces(buffer), buffer = compare_path(buffer, cpath);
 		if (buffer[0] != '\n' && buffer[0] != '\0')
