@@ -125,14 +125,19 @@ char *compare_path(char *buffer, char *path)
 		if (!r[len - 1])
 			r[len - 1] = '\n';
 		free(path), free(cbuffer), free(file), free(token);
-		return (buffer); }
+		return (buffer);
+	}
 	else
 	{
 		if (buffer[0] != '\n')
 		{
 			c = str_concat(token, buffer);
-			while(c[n] != '\0')
-				buffer[n] = c[n], n++; }
+			while (c[n] != '\0')
+			{
+				buffer[n] = c[n], n++;
+			}
+			free(c);
+		}
 		free(path), free(cbuffer), free(file), free(token);
 		return (buffer); }
 }

@@ -12,14 +12,14 @@ int main(void)
 
 	while (1)
 	{
-		s = 5, cont++, path = get_env("PATH="), cpath = cpstring(path);
 		signal(SIGINT, sigintHandler), prompt();
 		buffer = _calloc(bufsize, sizeof(char));
 		if (buffer == NULL)
 			free(buffer), ret();
 		d = getline1(&buffer, &bufsize, stdin);
 		if (d == -1 || d == EOF)
-			exit(0);
+			free(buffer), ret();
+		s = 5, cont++, path = get_env("PATH="), cpath = cpstring(path);
 		spaces(buffer), buffer = compare_path(buffer, cpath);
 		if (buffer[0] != '\n' && buffer[0] != '\0')
 		{
