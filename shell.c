@@ -33,21 +33,12 @@ int main(void)
 		{
 			status = execve(buff[0], buff, NULL);
 			if (status == -1 && buff[0] != NULL)
-				printf("hsh: %i: %s: not found\n", cont, buff[0]);
+				writeexe(buff, cont);
 			freeAll(buff), free(buffer), ret();
 		}
 		else
-		{
-			wait(&e);
-			extstatus(&e);
-		}
-		if (s == 0 && buff[0][0] != '\n')
-			printf("hsh: cd: %s: No such file or directory\n", buff[1]);
-		if (s == 3 && buff[0][0] != '\n')
-			printf("hsh: exit: Illegal number: %s\n", buff[1]);
-		if (buffer[0] != '\n' && buffer[0] != '\0')
-			freeAll(buff);
-		free(buffer);
+			wait(&e), extstatus(&e);
+		check(s, buff, buffer);
 	}
 	return (0);
 }
@@ -60,14 +51,42 @@ void ret(void)
 	exit(0);
 }
 /**
- * status - function
- *return: nothing
+ * extstatus - function
+ * @p: status error
+ * Return: status
  */
 int extstatus(int *p)
 {
 	static int status;
 
-	if(p != NULL)
+	if (p != NULL)
 		status = *p;
 	return (status);
+}
+/**
+ * writeexe - function
+ * @buff: buffer
+ * @cont: cont
+ *return: nothing
+ */
+void writeexe(char **buff, int cont)
+{
+	_puts2("hsh : ");
+	_puts2(unatoi(cont));
+	_puts2(" ");
+	_puts2(buff[0]);
+	_puts2(": not found");
+	_puts2("\n");
+}
+/**
+ * writes0 - function
+ * @buff: buffer
+ *return: nothing
+ */
+void writes0(char **buff)
+{
+	_puts2("hsh : cd: ");
+	_puts2(buff[1]);
+	_puts2(": No such file or directory");
+	_puts2("\n");
 }

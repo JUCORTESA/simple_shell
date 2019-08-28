@@ -50,7 +50,19 @@ Standard functions and system calls employed in simple_shell include:
   * `cpstring` - duplicates a string
 * [shell.c](shell.c) - main function of the shell
   * `main` - the main function of the program
-
+* [calloc.c](calloc.c) - allocates memory
+  * `calloc` - allocates memory and return a pointers
+* [realloc.c](realloc.c) - reallocates memory
+  * `calloc` - reallocates memory and return a pointers
+* [strcpy.c](strcpy.c) - copies string to buffer
+  * `calloc` - copies string to buffer
+* [aux.c](strcpy.c) - auxiliar functions to print
+  * `strlen` - returns the length of a string
+  * `_puts` - writes a string to standard output
+  * `_puts2` - writes a string to standard erro
+  * `unatoi` - converts an unsigned int to a string
+  
+ 
 
 ## Requirements
 
@@ -75,8 +87,8 @@ The simple_shell is designed to execute commands in a similar manner to sh, howe
 - [x] custom strtok function
 - [x] uses exit status
 - [x] shell continues upon Crtl+C (**^C**)
-- [ ] handles comments (#)
-- [ ] handles **;**
+- [x] handles comments (#)
+- [x] handles **;**
 - [x] custom getline type function
 - [ ] handles **&&** and **||**
 - [ ] aliases
@@ -89,7 +101,7 @@ The simple_shell is designed to execute commands in a similar manner to sh, howe
 - [x] env
 - [ ] setenv
 - [ ] unsetenv
-- [ ] cd
+- [x] cd
 - [ ] help
 - [ ] history
 

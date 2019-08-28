@@ -67,6 +67,9 @@ The following builtin commands are supported:
 
 .B exit
 - exits the program
+
+.B cd
+- change current directory
 .B exit
 
 .PP
@@ -87,5 +90,4 @@ Sergio Zamudio <954@holbertonschool.com>
 Juan Cortes <984@holbertonschool.com>
 
 .SH SEE ALSO
-csh(1), echo(1), getopt(1), ksh(1), login(1), printf(1), test(1), getopt(3),
-passwd(5), environ(7), sysctl(8)
+sh

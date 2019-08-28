@@ -36,7 +36,7 @@ char *cpstring(char *path)
 	char *cpath;
 	int i = 0;
 
-	cpath = _calloc((strlen(path) + 1), sizeof(char));
+	cpath = _calloc((_strlen(path) + 1), sizeof(char));
 	if (!cpath)
 	{
 		free(cpath);
@@ -76,7 +76,7 @@ int cd_fun(char *buff __attribute__((unused)), char **buffer)
 			while (buffer[1][i] == pwd[i])
 			{
 				cont++;
-				if (cont == strlen(buffer[1]))
+				if (cont == _strlen(buffer[1]))
 					dir = buffer[1], flag = 1;
 				i++;
 			}
@@ -127,7 +127,7 @@ char *oldpwd(void)
 	int len, x = 0;
 
 	OLDPWD = get_env("OLDPWD=");
-	len = strlen(OLDPWD);
+	len = _strlen(OLDPWD);
 	copy = malloc(len * sizeof(char));
 
 	while (OLDPWD[x] != '\0')

@@ -20,13 +20,13 @@ int coincidence(char **buff, char *buffer)
 
 	while (opci[i].type)
 	{
-		j = (strlen(buff[0]) - 1);
-		x = (strlen(opci[i].type) - 1);
+		j = (_strlen(buff[0]) - 1);
+		x = (_strlen(opci[i].type) - 1);
 		cont = 0;
 		while (opci[i].type[x] == buff[0][j])
 		{
 			cont++;
-			if (cont == strlen(opci[i].type))
+			if (cont == _strlen(opci[i].type))
 			{
 				res = (*opci[i].functiontype)(buffer, buff);
 			}
@@ -69,7 +69,7 @@ int ext(char *buff, char **buffer)
 		freeAll(buffer);
 		exit(extstatus(NULL));
 	}
-	return(0);
+	return (0);
 }
 /**
  * env - get and print the environ
@@ -84,7 +84,8 @@ int env(char *buff __attribute__((unused)),
 
 	for (; environ[i] != NULL; i++)
 	{
-		printf("%s\n", environ[i]);
+		_puts(environ[i]);
+		_puts("\n");
 	}
 	return (1);
 }
@@ -100,7 +101,7 @@ char *compare_path(char *buffer, char *path)
 	int len, d = -1, flag = 0;
 
 	cbuffer = cpstring(buffer), r = _strtok(cbuffer, " ");
-	len = strlen(r);
+	len = _strlen(r);
 	if (r[len - 1] == '\n')
 		r[len - 1] = '\0';
 	token = _strtok(path, "/"), file = str_concat(token, r);

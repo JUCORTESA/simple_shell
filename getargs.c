@@ -45,14 +45,14 @@ char **getargs(char *buffer)
 	token = _strtok(buffer, " ");
 	while (token != NULL && token[0] != '\n')
 	{
-		buff[y] = _calloc((strlen(token) + 1), sizeof(char));
+		buff[y] = _calloc((_strlen(token) + 1), sizeof(char));
 		if (buff[y] == NULL)
 		{
 			free(buffer);
 			freeAll(buff);
 			exit(0);
 		}
-		for (i = 0; i <= (strlen(token) - 1); i++)
+		for (i = 0; i <= (_strlen(token) - 1); i++)
 			buff[y][i] = token[i];
 		if (buff[y][i - 1] == '\n')
 			buff[y][i - 1] = '\0';
