@@ -12,7 +12,7 @@ int main(void)
 
 	while (1)
 	{
-		cont++, path = get_env("PATH="), cpath = cpstring(path);
+		s = 5, cont++, path = get_env("PATH="), cpath = cpstring(path);
 		signal(SIGINT, sigintHandler), prompt();
 		buffer = malloc(bufsize * sizeof(char));
 		if (buffer == NULL)
@@ -31,7 +31,7 @@ int main(void)
 		}
 		if (s == -1 && buff[0] != NULL && fork() == 0)
 		{
-			status = execve(buff[0], buff, NULL);
+			status = execve(buff[0], buff, environ);
 			if (status == -1 && buff[0] != NULL)
 				writeexe(buff, cont);
 			freeAll(buff), free(buffer), ret();
