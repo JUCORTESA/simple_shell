@@ -20,7 +20,7 @@ int main(void)
 		if (d == -1 || d == EOF)
 			free(buffer), ret();
 		s = 5, cont++, spaces(buffer);
-		if (environ[0] != NULL)
+		if (environ[0] != NULL && environ[0][1] != 'P' && environ[0][1] != 'W')
 			path = get_env("PATH="), cpath = cpstring(path),
 				buffer = compare_path(buffer, cpath);
 		if (buffer[0] != '\n' && buffer[0] != '\0')
