@@ -71,7 +71,7 @@ int extstatus(int *p)
  */
 void writeexe(char **buff, int cont)
 {
-	_puts2("hsh : ");
+	_puts2("hsh: ");
 	_puts2(unatoi(cont));
 	_puts2(" ");
 	_puts2(buff[0]);
@@ -85,7 +85,7 @@ void writeexe(char **buff, int cont)
  */
 void writes0(char **buff)
 {
-	_puts2("hsh : cd: ");
+	_puts2("hsh: cd: ");
 	_puts2(buff[1]);
 	_puts2(": No such file or directory");
 	_puts2("\n");

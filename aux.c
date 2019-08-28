@@ -88,7 +88,7 @@ char *unatoi(unsigned int count)
  */
 void writes3(char **buff)
 {
-	_puts2("hsh : exit: Illegal number: ");
+	_puts2("hsh: exit: Illegal number: ");
 	_puts2(buff[1]);
 	_puts2("\n");
 }
