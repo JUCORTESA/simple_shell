@@ -33,11 +33,23 @@ int main(void)
 		{
 			status = execve(buff[0], buff, NULL);
 			if (status == -1 && buff[0] != NULL)
-				printf("hsh : %i: %s: not found\n", cont, buff[0]);
+				{
+				_puts2("hsh : ");
+				_puts2(unatoi(cont));
+				_puts2(" ");
+				_puts2(buff[0]);
+				_puts2(": not found");
+				_puts2("\n");
+				}
 			freeAll(buff), free(buffer), ret();
 		}
 		if (s == 0 && buff[0][0] != '\n')
-			printf("hsh : cd: %s: No such file or directory\n", buff[1]);
+		{	
+			_puts2("hsh : cd: ");
+			_puts2(buff[1]);
+			_puts2(": No such file or directory");
+			_puts2("\n");
+		}
 		wait(NULL);
 		if (buffer[0] != '\n' && buffer[0] != '\0')
 			freeAll(buff);

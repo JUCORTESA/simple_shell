@@ -15,13 +15,13 @@ int coincidence(char **buff, char *buffer)
 
 	while(opci[i].type)
 	{
-		j = strlen(buff[0]);
-		x = strlen(opci[i].type);
+		j = _strlen(buff[0]);
+		x = _strlen(opci[i].type);
 		cont = 0;
 		while(opci[i].type[x] == buff[0][j])
 		{
 			cont++;
-			if (cont == strlen(opci[i].type))
+			if (cont == _strlen(opci[i].type))
 			{
 				res = (*opci[i].functiontype)(buffer, buff);
 			}
@@ -56,7 +56,8 @@ int env(char *buff __attribute__((unused)), char **buffer __attribute__((unused)
 
 	for (; environ[i] != NULL; i++)
 	{
-		printf("%s\n", environ[i]);
+		_puts(environ[i]);
+		_puts("\n");
 	}
 	return (1);
 }
@@ -67,7 +68,7 @@ char *compare_path(char *buffer, char*path)
 
 	cbuffer = cpstring(buffer);
 	r = _strtok(cbuffer, " ");
-	len = strlen(r);
+	len = _strlen(r);
 	if(r[len - 1] == '\n')
 		r[len - 1] = '\0';
 	token = _strtok(path, "/");

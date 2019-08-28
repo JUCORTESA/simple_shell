@@ -29,7 +29,6 @@ void ret(void);
 void prompt(void);
 void sigintHandler(int sig_num);
 char *_strtok(char *str, const char *delim);
-int _strlen(char *s);
 char **getargs(char *buffer);
 int count(char *buff, char *l);
 void freeAll(char **buff);
@@ -52,6 +51,8 @@ int cd_fun(char *buff, char **buffer);
 char *get_pwd(void);
 void changepwd(char *pwd);
 char *oldpwd(void);
-
-
+unsigned int _strlen(char *str);
+ssize_t _puts(char *str);
+void _puts2(char *str);
+char *unatoi(unsigned int count);
 #endif
