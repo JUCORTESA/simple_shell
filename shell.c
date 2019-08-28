@@ -19,8 +19,9 @@ int main(void)
 		d = getline1(&buffer, &bufsize, stdin);
 		if (d == -1 || d == EOF)
 			free(buffer), ret();
-		s = 5, cont++, path = get_env("PATH="), cpath = cpstring(path);
-		spaces(buffer), buffer = compare_path(buffer, cpath);
+		s = 5, cont++;
+		if (environ[0] != NULL)
+			path = get_env("PATH="), cpath = cpstring(path), spaces(buffer), buffer = compare_path(buffer, cpath);
 		if (buffer[0] != '\n' && buffer[0] != '\0')
 		{
 			buff = getargs(buffer);
