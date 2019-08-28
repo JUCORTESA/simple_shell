@@ -17,7 +17,7 @@ int main(void)
 		buffer = malloc(bufsize * sizeof(char));
 		if (buffer == NULL)
 			free(buffer), ret();
-		d = getline1(&buffer, &bufsize, stdin);
+		d = getline(&buffer, &bufsize, stdin);
 		if (d == -1 || d == EOF)
 			exit(0);
 		spaces(buffer), buffer = compare_path(buffer, cpath);
