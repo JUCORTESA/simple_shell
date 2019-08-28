@@ -8,7 +8,7 @@ int main(void)
 	char *buffer = NULL, **buff = NULL, *path, *cpath;
 	ssize_t d = 0;
 	size_t bufsize = (4096 * 2);
-	int status, s = 5, cont = 0, e;
+	int status, s = 5, cont = 0, e = 0;
 
 	while (1)
 	{
@@ -19,9 +19,10 @@ int main(void)
 		d = getline1(&buffer, &bufsize, stdin);
 		if (d == -1 || d == EOF)
 			free(buffer), ret();
-		s = 5, cont++;
+		s = 5, cont++, spaces(buffer);
 		if (environ[0] != NULL)
-			path = get_env("PATH="), cpath = cpstring(path), spaces(buffer), buffer = compare_path(buffer, cpath);
+			path = get_env("PATH="), cpath = cpstring(path),
+				buffer = compare_path(buffer, cpath);
 		if (buffer[0] != '\n' && buffer[0] != '\0')
 		{
 			buff = getargs(buffer);
