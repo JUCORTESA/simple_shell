@@ -1,5 +1,9 @@
 #include "holberton.h"
-extern char** environ;
+/**
+ * get_env - get a specific pointer of the env
+ * @path: the data to loocking for
+ * Return: a pointer to the data in the environ
+ */
 char *get_env(char *path)
 {
 	size_t i = 0, j;
@@ -9,7 +13,7 @@ char *get_env(char *path)
 	{
 		for (j = 0, cont = 0; environ[i][j] == path[j]; ++cont, j++)
 		{
-			if(cont == 2)
+			if (cont == 2)
 			{
 				flag = 1;
 				break;
@@ -18,8 +22,12 @@ char *get_env(char *path)
 		if (flag)
 			break;
 	}
-	return(environ[i]);
+	return (environ[i]);
 }
+/**
+ * get_pwd - create a copy of the path pointer of the env
+ * Return: a pointer to the data in the environ
+ */
 char *get_pwd(void)
 {
 	size_t i = 0, j;
@@ -30,7 +38,7 @@ char *get_pwd(void)
 	{
 		for (j = 0, cont = 0; environ[i][j] == path[j]; ++cont, j++)
 		{
-			if(cont == 2)
+			if (cont == 2)
 			{
 				flag = 1;
 				break;
@@ -39,5 +47,5 @@ char *get_pwd(void)
 		if (flag)
 			break;
 	}
-	return(cpstring(environ[i]));
+	return (cpstring(environ[i]));
 }

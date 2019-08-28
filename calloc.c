@@ -1,4 +1,10 @@
 #include "holberton.h"
+/**
+ * _calloc - create a malloc and set all positions at '\0'
+ * @nmemb: # of positions
+ * @size: size of type of data
+ * Return: a pointer to the first element of the alocation
+ */
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
 	char *p = NULL;

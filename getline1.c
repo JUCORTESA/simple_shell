@@ -6,7 +6,6 @@
  * @size_l: size of line
  * @size_b: size of buffer
  */
-
 void store_lineptr(char **lineptr, size_t *size_l, char *buffer, size_t size_b)
 {
 	size_t size = 1024;
@@ -45,21 +44,17 @@ ssize_t getline1(char **lineptr, size_t *n, FILE *stream)
 {
 
 	char *buffer, buff;
-	ssize_t count = 0, ret;
-	ssize_t size = 1024;
+	ssize_t count = 0, ret, size = 1024;
 	int i;
 
 	if (count == 0)
 		fflush(stream);
 	else
 		return (-1);
-
-
 	buffer = malloc(size);
 	if (buffer == 0)
 		return (-1);
-	do
-	{
+	do {
 		i = read(STDIN_FILENO, &buff, 1);
 		if (i == -1 || (i == 0 && count == 0))
 		{
@@ -77,15 +72,12 @@ ssize_t getline1(char **lineptr, size_t *n, FILE *stream)
 			buff = '\n';
 		if (buff == '#')
 		{
-			while( buff != '\n')
+			while (buff != '\n')
 				read(STDIN_FILENO, &buff, 1);
 		}
-		buffer[count] = buff;
-		count++;
+		buffer[count] = buff, count++;
 	} while (buff != '\n' && buff != ';' && buff != '#');
-	buffer[count] = '\0';
-	store_lineptr(lineptr, n, buffer, count);
-	ret = count;
+	buffer[count] = '\0', store_lineptr(lineptr, n, buffer, count), ret = count;
 	if (i != 0)
 		count = 0;
 	return (ret);
