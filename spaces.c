@@ -1,28 +1,36 @@
 #include "holberton.h"
-extern char** environ;
+/**
+ * spaces - remove the spaces at the begining of the buffer
+ * @buffer: buffer
+ * Return: the same buffer without spaces
+ */
 void spaces(char *buffer)
 {
 	int i = 0, j = 0;
 
 	if (buffer[i] == 32)
 	{
-		while(buffer[i] == 32)
+		while (buffer[i] == 32)
 		{
 			i++;
 		}
-		while(buffer[i] != '\0')
+		while (buffer[i] != '\0')
 		{
 			buffer[j] = buffer[i];
 			i++;
 			j++;
 		}
-		while(buffer[j] != '\0')
+		while (buffer[j] != '\0')
 		{
 			buffer[j] = '\0';
 		}
 	}
-	return;
 }
+/**
+ * cpstring - create a exact copy os a string
+ * @path: the string to copy
+ * Return: the copied string
+ */
 char *cpstring(char *path)
 {
 	char *cpath;
@@ -32,9 +40,9 @@ char *cpstring(char *path)
 	if (!cpath)
 	{
 		free(cpath);
-		return(cpath);
+		return (cpath);
 	}
-	while(path[i] != '\0')
+	while (path[i] != '\0')
 	{
 		cpath[i] = path[i];
 		i++;
@@ -42,13 +50,19 @@ char *cpstring(char *path)
 
 	return (cpath);
 }
+/**
+ * cd_fun - cd function
+ * @buff: an arrays of pointers
+ * @buffer: buffer
+ * Return:1 with success and 0 in error
+ */
 int cd_fun(char *buff __attribute__((unused)), char **buffer)
 {
 	char *dir, *pwd;
 	unsigned int i, cont, flag = 0;
 
 	pwd = get_pwd(), pwd = _strtok(pwd, "="), pwd = _strtok(NULL, "\0");
-	if (buffer[1] == NULL )
+	if (buffer[1] == NULL)
 		chdir("/home");
 	else
 	{
@@ -56,10 +70,10 @@ int cd_fun(char *buff __attribute__((unused)), char **buffer)
 			dir = "..";
 		else if (buffer[1][0] == '-' && buffer[1][1] == '\0')
 			dir = oldpwd();
-		else if(buffer[1][0] == '/')
+		else if (buffer[1][0] == '/')
 		{
 			i = 0, cont = 0;
-			while(buffer[1][i] == pwd[i])
+			while (buffer[1][i] == pwd[i])
 			{
 				cont++;
 				if (cont == strlen(buffer[1]))
@@ -68,22 +82,25 @@ int cd_fun(char *buff __attribute__((unused)), char **buffer)
 			}
 			if (!flag)
 			{
-				free(pwd);
-				return(0);
+				return (0);
 			}
 		}
 		else
 			dir = str_concat("./", buffer[1]);
 		if (chdir(dir) == -1)
 		{
-			free(pwd);
 			return (0);
 		}
 	}
 	getcwd(pwd, 1024);
 	changepwd(pwd);
-	return(1);
+	return (1);
 }
+/**
+ * changepwd - change pwd and oldpwd
+ * @pwd:pwd
+ * Return: nothing
+ */
 void changepwd(char *pwd)
 {
 	int j, z;
@@ -91,19 +108,19 @@ void changepwd(char *pwd)
 
 	PWD = get_env("PWD=");
 	OLDPWD = get_env("OLDPWD=");
-//	len1 = strlen(PWD);
-//	len2 = strlen(OLDPWD);
-
-
-	for(j = 4, z = 7; PWD[j] != '\0'; j++, z++)
+	for (j = 4, z = 7; PWD[j] != '\0'; j++, z++)
 		OLDPWD[z] = PWD[j];
-	while(OLDPWD[z] != '\0')
+	while (OLDPWD[z] != '\0')
 		OLDPWD[z] = '\0', z++;
-	for(j = 4, z = 0; pwd[z] != '\0'; j++, z++)
+	for (j = 4, z = 0; pwd[z] != '\0'; j++, z++)
 		PWD[j] = pwd[z];
-	while(PWD[j] != '\0')
+	while (PWD[j] != '\0')
 		PWD[j] = '\0', j++;
 }
+/**
+ * oldpwd - function cd -
+ * Return: nothing
+ */
 char *oldpwd(void)
 {
 	char *OLDPWD, *copy;
@@ -113,9 +130,9 @@ char *oldpwd(void)
 	len = strlen(OLDPWD);
 	copy = malloc(len * sizeof(char));
 
-	while(OLDPWD[x] != '\0')
+	while (OLDPWD[x] != '\0')
 		copy[x] = OLDPWD[x], x++;
 	copy = _strtok(copy, "=");
 	copy = _strtok(NULL, "\0");
-	return(copy);
+	return (copy);
 }

@@ -1,10 +1,10 @@
 #include "holberton.h"
 /**
- * getargs - create a arrays of pointer with all the arguments
- * @buffer: data catched for the getline
+ * count - count the number of words
+ * @buff: data catched for the getline
+ * @l: delimiter
  * Return: a duble poirnte to the buffer
  */
-
 int count(char *buff, char *l)
 {
 	int i = 0, j = 0;
@@ -16,7 +16,7 @@ int count(char *buff, char *l)
 			if (buff[i] != l[0] && buff[i] != '\n')
 			{
 				if (buff[i + 1] == l[0] || buff[i + 1] == '\0'
-				    || buff[i + 1] == '\n' )
+				    || buff[i + 1] == '\n')
 					j++;
 			}
 			i++;
@@ -24,19 +24,23 @@ int count(char *buff, char *l)
 	}
 	return (j);
 }
+/**
+ * getargs - create a arrays of pointer with all the arguments
+ * @buffer: data catched for the getline
+ * Return: a duble poirnte to the buffer
+ */
 char **getargs(char *buffer)
 {
 	char **buff = NULL, *token;
 	size_t cont = 0, i, y = 0;
 
 	cont = count(buffer, " ");
-	buff = malloc(sizeof(char*) * (cont + 1));
-//	buff = _calloc((cont + 1), sizeof(char *));
+	buff = malloc(sizeof(char *) * (cont + 1));
 	if (!buff)
 	{
 		free(buffer);
 		free(buff);
-		exit(0); /* pendiente mirar error */
+		exit(0);
 	}
 	token = _strtok(buffer, " ");
 	while (token != NULL && token[0] != '\n')

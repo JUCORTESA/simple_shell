@@ -1,5 +1,10 @@
 #include "holberton.h"
-
+/**
+ * coincidence - look for an element in the struct
+ * @buff: an arrays of ponters
+ * @buffer: buffer
+ * Return: an int depend of the error
+ */
 int coincidence(char **buff, char *buffer)
 {
 
@@ -13,12 +18,12 @@ int coincidence(char **buff, char *buffer)
 	unsigned int cont = 0;
 
 
-	while(opci[i].type)
+	while (opci[i].type)
 	{
-		j = strlen(buff[0]);
-		x = strlen(opci[i].type);
+		j = (strlen(buff[0]) - 1);
+		x = (strlen(opci[i].type) - 1);
 		cont = 0;
-		while(opci[i].type[x] == buff[0][j])
+		while (opci[i].type[x] == buff[0][j])
 		{
 			cont++;
 			if (cont == strlen(opci[i].type))
@@ -32,25 +37,48 @@ int coincidence(char **buff, char *buffer)
 	}
 	return (res);
 }
+/**
+ * ext - exit function
+ * @buff: an arrays of ponters
+ * @buffer: buffer
+ * Return: an int depend of the error
+ */
 int ext(char *buff, char **buffer)
 {
-	int i = 0, j = 0, dec = 0;
+	int j = 0, dec = 0;
+	unsigned int i = 0;
 
 	if (buffer[1])
 	{
-		while(buffer[1][i] != '\0')
+		while (buffer[1][i] != '\0' && buffer[1][i] > 47
+		       && buffer[1][i] < 58)
 		{
 			j = (j * dec) + (buffer[1][i] - '0');
 			dec = 10;
 			i++;
 		}
+		if (strlen(buffer[1]) != i)
+			return (3);
+		free(buff);
+		freeAll(buffer);
+		exit(j % 256);
 	}
-	free(buff);
-	freeAll(buffer);
-	exit(j % 256);
+	else if (!buffer[1])
+	{
+		free(buff);
+		freeAll(buffer);
+		exit(extstatus(NULL));
+	}
+	return(0);
 }
-extern char** environ;
-int env(char *buff __attribute__((unused)), char **buffer __attribute__((unused)))
+/**
+ * env - get and print the environ
+ * @buff: an arrays of ponters
+ * @buffer: buffer
+ * Return: nothing
+ */
+int env(char *buff __attribute__((unused)),
+	char **buffer __attribute__((unused)))
 {
 	size_t i = 0;
 
@@ -60,30 +88,31 @@ int env(char *buff __attribute__((unused)), char **buffer __attribute__((unused)
 	}
 	return (1);
 }
-char *compare_path(char *buffer, char*path)
+/**
+ * compare_path - compare a get the correct path to the command
+ * @path: an arrays of ponters
+ * @buffer: buffer
+ * Return: nothing
+ */
+char *compare_path(char *buffer, char *path)
 {
 	char *token, *r, *file, *cbuffer, *c;
 	int len, d = -1, flag = 0;
 
-	cbuffer = cpstring(buffer);
-	r = _strtok(cbuffer, " ");
+	cbuffer = cpstring(buffer), r = _strtok(cbuffer, " ");
 	len = strlen(r);
-	if(r[len - 1] == '\n')
+	if (r[len - 1] == '\n')
 		r[len - 1] = '\0';
-	token = _strtok(path, "/");
-	file = str_concat(token, r);
-	while(d  == -1)
+	token = _strtok(path, "/"), file = str_concat(token, r);
+	while (d  == -1)
 	{
 		free(file);
 		if (r[0] != '/')
-		{
-			token = str_concat(_strtok(NULL, ":"), "/");
-			flag = 1;
-		}
+			token = str_concat(_strtok(NULL, ":"), "/"), flag = 1;
 		else
 			token = _strtok(NULL, ":");
 		file = str_concat(token, r);
-		if( token == NULL || (token[0] == '/' && token[1] == '\0'))
+		if (token == NULL || (token[0] == '/' && token[1] == '\0'))
 			break;
 		d = open(file, O_RDONLY);
 		if (d == -1 && flag)
@@ -93,11 +122,8 @@ char *compare_path(char *buffer, char*path)
 	{
 		if (!r[len - 1])
 			r[len - 1] = '\n';
-		free(path);
-		free(cbuffer);
-		free(file);
-		free(token);
-		return(buffer);
+		free(path), free(cbuffer), free(file), free(token);
+		return (buffer);
 	}
 	else
 	{
@@ -106,13 +132,16 @@ char *compare_path(char *buffer, char*path)
 			c = str_concat(token, buffer);
 			free(buffer);
 		}
-		free(path);
-		free(cbuffer);
-		free(file);
-		free(token);
-		return(c);
+		free(path), free(cbuffer), free(file), free(token);
+		return (c);
 	}
 }
+/**
+ * str_concat - mix two different strings
+ * @s1: first string
+ * @s2: second string
+ * Return: a pointer to the new string
+ */
 char *str_concat(char *s1, char *s2)
 {
 	char *p = NULL;

@@ -13,6 +13,7 @@
 #include <stdint.h>
 #include <stdarg.h>
 #include <fcntl.h>
+extern char **environ;
 
 /**
  * struct type - struct of type of data
@@ -25,6 +26,7 @@ typedef struct type
 	int (*functiontype)(char *buffer, char **buff);
 } data;
 
+int extstatus(int *p);
 void ret(void);
 void prompt(void);
 void sigintHandler(int sig_num);
