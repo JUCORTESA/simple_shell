@@ -47,7 +47,9 @@ int ext(char *buff, char **buffer)
 {
 	int j = 0, dec = 0, e = 0, f = 0;
 	unsigned int i = 0;
+	static int flag = 1;
 
+	flag++;
 	if (buffer[1])
 	{
 		while (buffer[1][i] != '\0' && buffer[1][i] > 47
@@ -69,6 +71,8 @@ int ext(char *buff, char **buffer)
 		freeAll(buffer);
 		e = extstatus(NULL);
 		f = e % 255;
+		if (flag == 2)
+			exit(flag);
 		if (environ[0] == NULL)
 			exit(0);
 		exit(f);

@@ -8,7 +8,7 @@ int main(void)
 	char *buffer = NULL, **buff = NULL, *path, *cpath;
 	ssize_t d = 0;
 	size_t bufsize = (4096 * 2);
-	int status, s = 5, cont = 0, e = 0;
+	int status, s = 5, cont = 0, e = 2;
 
 	while (1)
 	{
@@ -40,7 +40,7 @@ int main(void)
 		}
 		else
 			wait(&e), extstatus(&e);
-		check(s, buff, buffer);
+		check(s, buff, buffer, cont);
 	}
 	return (0);
 }
