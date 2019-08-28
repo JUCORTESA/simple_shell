@@ -71,12 +71,16 @@ int extstatus(int *p)
  */
 void writeexe(char **buff, int cont)
 {
+	char *p;
+
 	_puts2("hsh: ");
-	_puts2(unatoi(cont));
+	p = unatoi(cont);
+	_puts2(p);
 	_puts2(" ");
 	_puts2(buff[0]);
 	_puts2(": not found");
 	_puts2("\n");
+	free(p);
 }
 /**
  * writes0 - function
