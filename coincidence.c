@@ -71,7 +71,7 @@ int ext(char *buff, char **buffer)
 		freeAll(buffer);
 		e = extstatus(NULL);
 		f = e % 255;
-		if (flag == 2)
+		if (flag == 3)
 			exit(flag);
 		if (environ[0] == NULL)
 			exit(0);
@@ -92,8 +92,8 @@ int env(char *buff __attribute__((unused)),
 
 	for (; environ[i] != NULL; i++)
 	{
-		_puts(environ[i]);
-		_puts("\n");
+		write(1, environ[i], _strlen(environ[i]));
+		write(1, "\n", 1);
 	}
 	return (1);
 }
