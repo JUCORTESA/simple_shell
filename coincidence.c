@@ -61,13 +61,13 @@ int ext(char *buff, char **buffer)
 			return (3);
 		free(buff);
 		freeAll(buffer);
-		exit(j % 256);
+		exit(j % 255);
 	}
 	else if (!buffer[1])
 	{
 		free(buff);
 		freeAll(buffer);
-		exit(extstatus(NULL));
+		exit((extstatus(NULL) % 255));
 	}
 	return (0);
 }

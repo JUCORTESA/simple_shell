@@ -8,9 +8,9 @@ void spaces(char *buffer)
 {
 	int i = 0, j = 0;
 
-	if (buffer[i] == 32)
+	if (buffer[i] == 32 || buffer[i] == 9)
 	{
-		while (buffer[i] == 32)
+		while (buffer[i] == 32 || buffer[i] == 9)
 		{
 			i++;
 		}
