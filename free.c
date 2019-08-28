@@ -26,14 +26,15 @@ void freeAll(char **buf)
  * @s: error
  * @buff: an arrays of pointers
  * @buffer: buffer
+ * @cont: cont
  * Return: nothing
  */
-void check(int s, char **buff, char *buffer)
+void check(int s, char **buff, char *buffer, int cont)
 {
 	if (s == 0 && buff[0][0] != '\n')
 		writes0(buff);
 	if (s == 3 && buff[0][0] != '\n')
-		writes3(buff);
+		writes3(buff, cont);
 	if (buffer[0] != '\n' && buffer[0] != '\0')
 		freeAll(buff);
 	free(buffer);

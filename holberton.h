@@ -26,8 +26,8 @@ typedef struct type
 	int (*functiontype)(char *buffer, char **buff);
 } data;
 
-void check(int s, char **buff, char *buffer);
-void writes3(char **buff);
+void check(int s, char **buff, char *buffer, int check);
+void writes3(char **buff, int cont);
 void writes0(char **buff);
 void writeexe(char **buff, int cont);
 int extstatus(int *p);

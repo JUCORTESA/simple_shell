@@ -84,11 +84,18 @@ char *unatoi(unsigned int count)
 /**
  * writes3 - function
  * @buff: buffer
+ * @cont: cont
  *return: nothing
  */
-void writes3(char **buff)
+void writes3(char **buff, int cont)
 {
-	_puts2("hsh: exit: Illegal number: ");
+	char *x;
+
+	x = unatoi(cont);
+	_puts2("hsh: ");
+	_puts2(x);
+	_puts2(": exit: Illegal number: ");
 	_puts2(buff[1]);
 	_puts2("\n");
+	free(x);
 }
