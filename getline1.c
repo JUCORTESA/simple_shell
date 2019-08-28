@@ -8,7 +8,7 @@
  */
 void store_lineptr(char **lineptr, size_t *size_l, char *buffer, size_t size_b)
 {
-	size_t size = 1024;
+	size_t size = (4096 * 2);
 
 	if (*lineptr == NULL)
 	{
@@ -44,7 +44,7 @@ ssize_t getline1(char **lineptr, size_t *n, FILE *stream)
 {
 
 	char *buffer, buff;
-	ssize_t count = 0, ret, size = 1024;
+	ssize_t count = 0, ret, size = (4096 * 2);
 	int i;
 
 	if (count == 0)
