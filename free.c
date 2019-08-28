@@ -21,3 +21,20 @@ void freeAll(char **buf)
 		free(buf);
 	}
 }
+/**
+ * check - fee al the buf
+ * @s: error
+ * @buff: an arrays of pointers
+ * @buffer: buffer
+ * Return: nothing
+ */
+void check(int s, char **buff, char *buffer)
+{
+	if (s == 0 && buff[0][0] != '\n')
+		writes0(buff);
+	if (s == 3 && buff[0][0] != '\n')
+		writes3(buff);
+	if (buffer[0] != '\n' && buffer[0] != '\0')
+		freeAll(buff);
+	free(buffer);
+}
