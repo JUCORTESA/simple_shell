@@ -40,6 +40,7 @@ Standard functions and system calls employed in simple_shell include:
 * [get_env.c](get_env.c) - enviromental variables related function
   * `get_env` - gets an environ char
   * `get_pwd` - creates a pointer of the path
+  * `get_env1` - get a specific pointer from env
 * [_strtok.c](_strtok.c) - custom strtok
   * `_strtok` - checks if a character matches in a string and breaks it into tokens
 * [getline1.c](getline1.c) - functions related to get a line
