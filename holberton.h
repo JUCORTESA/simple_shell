@@ -62,6 +62,10 @@ unsigned int _strlen(char *str);
 ssize_t _puts(char *str);
 void _puts2(char *str);
 char *unatoi(unsigned int count);
-
+int help(char *cmd, char **abc);
+void help_cd(char *cmd);
+void help_exit(char *cmd);
+void help_env(char *cmd);
+void help_help(char *cmd);
 
 #endif

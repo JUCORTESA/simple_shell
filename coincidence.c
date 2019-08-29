@@ -12,6 +12,7 @@ int coincidence(char **buff, char *buffer)
 		{"exit", ext},
 		{"env", env},
 		{"cd", cd_fun},
+		{"help", help},
 		{NULL, NULL}
 	};
 	int i = 0, j, res = -1, x;
@@ -71,7 +72,7 @@ int ext(char *buff, char **buffer)
 		freeAll(buffer);
 		e = extstatus(NULL);
 		f = e % 255;
-		if (flag == 3)
+		if (flag != 2)
 			exit(flag);
 		if (environ[0] == NULL)
 			exit(0);
