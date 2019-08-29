@@ -55,6 +55,7 @@ Standard functions and system calls employed in simple_shell include:
   * `main` - the main function of the program
   * `ret` - return function
   * `extstatus` - return status
+  * `writeexe` - writes to standar error
 * [calloc.c](calloc.c) - allocates memory
   * `calloc` - allocates memory and return a pointers
 * [realloc.c](realloc.c) - reallocates memory
