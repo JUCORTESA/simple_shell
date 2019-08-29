@@ -62,7 +62,7 @@ Standard functions and system calls employed in simple_shell include:
 * [realloc.c](realloc.c) - reallocates memory
   * `calloc` - reallocates memory and return a pointers
 * [strcpy.c](strcpy.c) - copies string to buffer
-  * `calloc` - copies string to buffer
+  * `strcpy` - copies string to buffer
 * [aux.c](strcpy.c) - auxiliar functions to print
   * `strlen` - returns the length of a string
   * `_puts` - writes a string to standard output
