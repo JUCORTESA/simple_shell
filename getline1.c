@@ -76,7 +76,8 @@ ssize_t getline1(char **lineptr, size_t *n, FILE *stream)
 				read(STDIN_FILENO, &buff, 1);
 		}
 		buffer[count] = buff, count++;
-	} while (buff != '\n' && buff != ';' && ((buffer[count - 2] != 32) || (buff != '#')));
+	} while (buff != '\n' && buff != ';' && ((buffer[count - 2] != 32)
+		|| (buff != '#')));
 	buffer[count] = '\0', store_lineptr(lineptr, n, buffer, count), ret = count;
 	if (i != 0)
 		count = 0;
