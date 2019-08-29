@@ -30,6 +30,7 @@ Standard functions and system calls employed in simple_shell include:
   * `str_concate` - concates two strings
 * [free.c](free.c) - function related to free
   * `freeAll` - frees a buffer
+  * `checks` - writes to standar error
 * [exit.c](exit.c) - fuction related to exit
   * `sigintHandler` - signal error
   * `free_env` - frees the shell's environment
