@@ -39,6 +39,7 @@ Standard functions and system calls employed in simple_shell include:
   * `getargs` - creates arrays of ponters with all the arguments
 * [get_env.c](get_env.c) - enviromental variables related function
   * `get_env` - gets an environ char
+  * `get_pwd` - creates a pointer of the path
 * [_strtok.c](_strtok.c) - custom strtok
   * `_strtok` - checks if a character matches in a string and breaks it into tokens
 * [getline1.c](getline1.c) - functions related to get a line
