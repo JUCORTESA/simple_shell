@@ -53,6 +53,7 @@ Standard functions and system calls employed in simple_shell include:
   * `cpstring` - duplicates a string
   * `cd_fun` - cd function
   * `changepwd` - change pwd and old pwd
+  * `oldpwd` - get oldpwd
 * [shell.c](shell.c) - main function of the shell
   * `main` - the main function of the program
   * `ret` - return function
