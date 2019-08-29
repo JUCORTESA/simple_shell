@@ -61,6 +61,7 @@ Standard functions and system calls employed in simple_shell include:
   * `_puts` - writes a string to standard output
   * `_puts2` - writes a string to standard erro
   * `unatoi` - converts an unsigned int to a string
+  * `writes3` - writes to estandar error
   
  
 
