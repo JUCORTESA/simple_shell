@@ -118,7 +118,7 @@ void changepwd(char *pwd)
 		PWD[j] = '\0', j++;
 }
 /**
- * oldpwd - function cd -
+ * oldpwd - function cd
  * Return: nothing
  */
 char *oldpwd(void)
