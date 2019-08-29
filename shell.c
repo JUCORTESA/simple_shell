@@ -54,7 +54,7 @@ void ret(void)
 	exit(0);
 }
 /**
- * extstatus - function
+ * extstatus - status function
  * @p: status error
  * Return: status
  */
@@ -67,7 +67,7 @@ int extstatus(int *p)
 	return (status);
 }
 /**
- * writeexe - function
+ * writeexe - writes if not found
  * @buff: buffer
  * @cont: cont
  *return: nothing
@@ -86,7 +86,7 @@ void writeexe(char **buff, int cont)
 	free(p);
 }
 /**
- * writes0 - function
+ * writes0 - writes if not file
  * @buff: buffer
  *return: nothing
  */
